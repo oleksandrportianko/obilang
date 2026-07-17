@@ -27,6 +27,10 @@ dist/
 .env.*
 !.env.example
 
+# Personal training overlays; keep the directory but never commit local configs.
+configs/training/custom/*
+!configs/training/custom/.gitkeep
+
 # Generated corpora and data artifacts (retain docs/placeholders/benchmarks)
 datasets/*/raw/*
 !datasets/*/raw/.gitkeep
