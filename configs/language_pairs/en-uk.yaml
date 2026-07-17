@@ -1,0 +1,85 @@
+language_pair:
+  id: en-uk
+  source_language: en
+  target_language: uk
+  bidirectional: true
+
+data:
+  unicode_normalization: NFC
+  minimum_characters: 1
+  maximum_characters: 1000
+  maximum_tokens_approximation: 256
+  maximum_length_ratio: 3.0
+  detect_language_mismatch: false
+  source_scripts: [Latn]
+  target_scripts: [Cyrl]
+  reject_malformed_markup: true
+  split:
+    train: 0.90
+    validation: 0.05
+    test: 0.05
+    seed: 42
+
+tokenizer:
+  type: sentencepiece_bpe
+  shared: true
+  vocabulary_size: 24000
+  character_coverage: 1.0
+  byte_fallback: false
+
+model:
+  embedding_dimension: 384
+  attention_heads: 6
+  encoder_layers: 4
+  decoder_layers: 4
+  feedforward_dimension: 1536
+  dropout: 0.1
+  maximum_sequence_length: 256
+  tied_target_embeddings: true
+  initialization: xavier_uniform
+
+training:
+  batch_tokens: 4096
+  gradient_accumulation_steps: 8
+  learning_rate: 0.0003
+  warmup_steps: 4000
+  scheduler: inverse_sqrt
+  epochs: 20
+  label_smoothing: 0.1
+  gradient_clip_norm: 1.0
+  mixed_precision: true
+  checkpoint_every_steps: 1000
+  validate_every_steps: 1000
+  keep_periodic_checkpoints: 3
+  patience_validations: 8
+  seed: 42
+  deterministic: false
+  device: auto
+
+fine_tuning:
+  learning_rate: 0.00003
+  epochs: 5
+  replay_enabled: true
+  replay_strategy: balanced
+  new_data_ratio: 0.5
+  historical_data_ratio: 0.5
+  historical_example_count: null
+  freeze_embeddings: false
+  freeze_encoder_layers: 0
+
+evaluation:
+  metrics:
+    - bleu
+    - chrf
+    - perplexity
+    - exact_match
+    - number_accuracy
+    - punctuation_accuracy
+    - placeholder_accuracy
+    - markup_accuracy
+
+promotion:
+  minimum_chrf_change: 0.0
+  maximum_bleu_regression: 0.3
+  maximum_number_accuracy_regression: 0.0
+  maximum_placeholder_accuracy_regression: 0.0

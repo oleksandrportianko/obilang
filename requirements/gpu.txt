@@ -1,0 +1,2 @@
+# Install the CUDA-specific torch wheel using the command from pytorch.org first.
+-r base.txt

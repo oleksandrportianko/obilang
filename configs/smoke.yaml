@@ -1,0 +1,58 @@
+# Tiny CPU-only settings verify mechanics, not translation quality.
+tokenizer:
+  type: sentencepiece_bpe
+  shared: true
+  vocabulary_size: 96
+  character_coverage: 1.0
+  byte_fallback: false
+
+model:
+  embedding_dimension: 32
+  attention_heads: 4
+  encoder_layers: 1
+  decoder_layers: 1
+  feedforward_dimension: 64
+  dropout: 0.0
+  maximum_sequence_length: 32
+  tied_target_embeddings: true
+  share_source_target_embeddings: true
+  initialization: xavier_uniform
+
+training:
+  batch_tokens: 256
+  gradient_accumulation_steps: 1
+  learning_rate: 0.001
+  weight_decay: 0.0
+  warmup_steps: 1
+  scheduler: constant
+  epochs: 2
+  label_smoothing: 0.0
+  gradient_clip_norm: 1.0
+  mixed_precision: false
+  checkpoint_every_steps: 1
+  validate_every_steps: 1
+  keep_periodic_checkpoints: 2
+  patience_validations: 4
+  seed: 42
+  deterministic: true
+  device: cpu
+  num_workers: 0
+  log_every_steps: 1
+  maximum_steps: 2
+
+fine_tuning:
+  learning_rate: 0.0005
+  epochs: 1
+  replay_enabled: true
+  replay_strategy: balanced
+  new_data_ratio: 0.5
+  historical_data_ratio: 0.5
+  historical_example_count: null
+  freeze_embeddings: false
+  freeze_encoder_layers: 0
+
+evaluation:
+  metrics: [bleu, chrf, perplexity, exact_match, number_accuracy, placeholder_accuracy]
+  beam_width: 2
+  length_penalty: 0.6
+  sample_count: 5

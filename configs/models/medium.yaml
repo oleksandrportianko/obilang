@@ -1,0 +1,10 @@
+model:
+  embedding_dimension: 384
+  attention_heads: 6
+  encoder_layers: 4
+  decoder_layers: 4
+  feedforward_dimension: 1536
+  dropout: 0.1
+  maximum_sequence_length: 256
+  tied_target_embeddings: true
+  initialization: xavier_uniform

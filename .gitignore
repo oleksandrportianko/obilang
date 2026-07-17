@@ -1,0 +1,72 @@
+# Python environments and caches
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+*.pyo
+.pytest_cache/
+.coverage
+htmlcov/
+.ruff_cache/
+.mypy_cache/
+
+# Packaging and editor state
+*.egg-info/
+build/
+dist/
+.DS_Store
+.idea/
+.vscode/
+.agents/
+.cursor/
+.mcp/
+.mcp.json
+
+# Local platform configuration
+.env
+.env.*
+!.env.example
+
+# Generated corpora and data artifacts (retain docs/placeholders/benchmarks)
+datasets/*/raw/*
+!datasets/*/raw/.gitkeep
+datasets/*/incoming/*
+!datasets/*/incoming/.gitkeep
+datasets/*/processed/*
+!datasets/*/processed/.gitkeep
+datasets/*/splits/*
+!datasets/*/splits/.gitkeep
+datasets/*/rejected/*
+!datasets/*/rejected/.gitkeep
+datasets/*/tokenizer/*
+!datasets/*/tokenizer/.gitkeep
+datasets/*/metadata/current.json
+datasets/*/metadata/report-*.json
+
+# Generated weights, runs, reports, and logs
+models/**/checkpoints/
+models/**/versions/
+models/**/exports/
+!models/**/checkpoints/
+!models/**/checkpoints/.gitkeep
+!models/**/versions/
+!models/**/versions/.gitkeep
+!models/**/exports/
+!models/**/exports/.gitkeep
+models/**/checkpoints/*/
+models/**/versions/*/
+models/**/exports/*/
+models/**/registry.json
+models/**/.registry.lock
+experiments/**
+!experiments/.gitkeep
+reports/**
+!reports/.gitkeep
+logs/**
+!logs/.gitkeep
+
+# Torch/TensorBoard runtime files
+*.pt
+*.pth
+*.ckpt
+events.out.tfevents.*

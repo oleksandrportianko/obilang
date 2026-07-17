@@ -1,0 +1,8 @@
+{"category":"short","source":"Hello!","target":"Привіт!"}
+{"category":"numbers","source":"The total is 1,234.50 dollars.","target":"Загальна сума становить 1 234,50 долара."}
+{"category":"dates","source":"The meeting is on July 17, 2026.","target":"Зустріч відбудеться 17 липня 2026 року."}
+{"category":"url","source":"Open https://example.com/docs?q=1.","target":"Відкрийте https://example.com/docs?q=1."}
+{"category":"placeholder","source":"Welcome, {user_name}!","target":"Ласкаво просимо, {user_name}!"}
+{"category":"markup","source":"Click <strong>Save</strong>.","target":"Натисніть <strong>Зберегти</strong>."}
+{"category":"technical","source":"The decoder applies a causal attention mask.","target":"Декодер застосовує причинну маску уваги."}
+{"category":"quotes","source":"She said: “Do not stop.”","target":"Вона сказала: «Не зупиняйся»."}

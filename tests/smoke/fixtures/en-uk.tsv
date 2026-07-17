@@ -1,0 +1,81 @@
+source_text	target_text	domain
+I have 1 red apple.	У мене є 1 червоне яблуко.	general
+I have 2 green apples.	У мене є 2 зелені яблука.	general
+I have 3 new books.	У мене є 3 нові книги.	general
+I have 4 blue pens.	У мене є 4 сині ручки.	general
+I have 5 small boxes.	У мене є 5 малих коробок.	general
+The train arrives at 6.	Потяг прибуває о 6.	travel
+The train arrives at 7.	Потяг прибуває о 7.	travel
+The train arrives at 8.	Потяг прибуває о 8.	travel
+The bus leaves at 9.	Автобус вирушає о 9.	travel
+The bus leaves at 10.	Автобус вирушає о 10.	travel
+Room 11 is ready.	Кімната 11 готова.	hotel
+Room 12 is ready.	Кімната 12 готова.	hotel
+Room 13 is clean.	Кімната 13 чиста.	hotel
+Room 14 is quiet.	Кімната 14 тиха.	hotel
+Room 15 is large.	Кімната 15 велика.	hotel
+Order 16 is complete.	Замовлення 16 виконано.	commerce
+Order 17 is delayed.	Замовлення 17 затримується.	commerce
+Order 18 is ready.	Замовлення 18 готове.	commerce
+Order 19 is open.	Замовлення 19 відкрите.	commerce
+Order 20 is closed.	Замовлення 20 закрите.	commerce
+File 21 was saved.	Файл 21 збережено.	technical
+File 22 was deleted.	Файл 22 видалено.	technical
+File 23 was opened.	Файл 23 відкрито.	technical
+File 24 was copied.	Файл 24 скопійовано.	technical
+File 25 was moved.	Файл 25 переміщено.	technical
+User 26 signed in.	Користувач 26 увійшов.	technical
+User 27 signed out.	Користувач 27 вийшов.	technical
+User 28 changed a password.	Користувач 28 змінив пароль.	technical
+User 29 created a project.	Користувач 29 створив проєкт.	technical
+User 30 closed the project.	Користувач 30 закрив проєкт.	technical
+Today is day 31.	Сьогодні день 31.	general
+Today is day 32.	Сьогодні день 32.	general
+Today is day 33.	Сьогодні день 33.	general
+Today is day 34.	Сьогодні день 34.	general
+Today is day 35.	Сьогодні день 35.	general
+Page 36 contains a table.	Сторінка 36 містить таблицю.	documents
+Page 37 contains a chart.	Сторінка 37 містить діаграму.	documents
+Page 38 contains a note.	Сторінка 38 містить примітку.	documents
+Page 39 contains a link.	Сторінка 39 містить посилання.	documents
+Page 40 contains a title.	Сторінка 40 містить заголовок.	documents
+Ticket 41 has high priority.	Заявка 41 має високий пріоритет.	support
+Ticket 42 has low priority.	Заявка 42 має низький пріоритет.	support
+Ticket 43 needs review.	Заявка 43 потребує перевірки.	support
+Ticket 44 needs an answer.	Заявка 44 потребує відповіді.	support
+Ticket 45 is resolved.	Заявку 45 вирішено.	support
+Version 46 is stable.	Версія 46 стабільна.	technical
+Version 47 is experimental.	Версія 47 експериментальна.	technical
+Version 48 is available.	Версія 48 доступна.	technical
+Version 49 is protected.	Версія 49 захищена.	technical
+Version 50 is archived.	Версія 50 заархівована.	technical
+Sample 51 is short.	Приклад 51 короткий.	general
+Sample 52 is correct.	Приклад 52 правильний.	general
+Sample 53 is useful.	Приклад 53 корисний.	general
+Sample 54 is unique.	Приклад 54 унікальний.	general
+Sample 55 is accepted.	Приклад 55 прийнято.	general
+Test 56 passed.	Тест 56 пройдено.	technical
+Test 57 failed.	Тест 57 не пройдено.	technical
+Test 58 started.	Тест 58 розпочато.	technical
+Test 59 finished.	Тест 59 завершено.	technical
+Test 60 was skipped.	Тест 60 пропущено.	technical
+Message 61 was sent.	Повідомлення 61 надіслано.	general
+Message 62 was received.	Повідомлення 62 отримано.	general
+Message 63 was read.	Повідомлення 63 прочитано.	general
+Message 64 was updated.	Повідомлення 64 оновлено.	general
+Message 65 was removed.	Повідомлення 65 видалено.	general
+The value is 66 percent.	Значення становить 66 відсотків.	general
+The value is 67 percent.	Значення становить 67 відсотків.	general
+The value is 68 percent.	Значення становить 68 відсотків.	general
+The value is 69 percent.	Значення становить 69 відсотків.	general
+The value is 70 percent.	Значення становить 70 відсотків.	general
+Button 71 is active.	Кнопка 71 активна.	interface
+Button 72 is disabled.	Кнопка 72 вимкнена.	interface
+Button 73 is visible.	Кнопка 73 видима.	interface
+Button 74 is hidden.	Кнопка 74 прихована.	interface
+Button 75 was clicked.	Кнопку 75 натиснуто.	interface
+Record 76 exists.	Запис 76 існує.	general
+Record 77 is missing.	Запис 77 відсутній.	general
+Record 78 is valid.	Запис 78 дійсний.	general
+Record 79 is invalid.	Запис 79 недійсний.	general
+Record 80 is final.	Запис 80 остаточний.	general
