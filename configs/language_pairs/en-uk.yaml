@@ -68,6 +68,9 @@ fine_tuning:
   freeze_encoder_layers: 0
 
 evaluation:
+  # Keep autoregressive validation memory bounded independently of training batches.
+  batch_tokens: 1024
+  maximum_generation_length: 64
   metrics:
     - bleu
     - chrf

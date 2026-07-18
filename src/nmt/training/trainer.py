@@ -105,9 +105,10 @@ def _data_loader(
     tokenizers: TokenizerBundle,
     shuffle: bool,
     epoch: int = 0,
+    token_budget: int | None = None,
 ) -> tuple[DataLoader[TranslationBatch], TokenBatchSampler]:
     """Create a dynamic-token DataLoader and its epoch-aware sampler."""
-    sampler = TokenBatchSampler(dataset, config.batch_tokens, shuffle, config.seed, epoch)
+    sampler = TokenBatchSampler(dataset, token_budget or config.batch_tokens, shuffle, config.seed, epoch)
     loader = DataLoader(
         dataset,
         batch_sampler=sampler,
@@ -136,6 +137,7 @@ def evaluate_loader(
     device: torch.device,
     label_smoothing: float,
     sample_limit: int | None = None,
+    maximum_generation_length: int | None = None,
 ) -> tuple[dict[str, Any], list[dict[str, str]]]:
     """Measure loss and generate real translations for an entire stable split.
 
@@ -176,6 +178,8 @@ def evaluate_loader(
             model.config.maximum_sequence_length,
             max(8, batch.target_output_ids.size(1) * 2),
         )
+        if maximum_generation_length is not None:
+            generation_limit = min(generation_limit, maximum_generation_length)
         generated = model.greedy_generate(
             batch.source_ids,
             tokenizers.target.bos_id,
@@ -415,9 +419,15 @@ def train_model(
         train_dataset, config.training, tokenizers, shuffle=True
     )
     validation_loader, _ = _data_loader(
-        validation_dataset, config.training, tokenizers, shuffle=False
+        validation_dataset,
+        config.training,
+        tokenizers,
+        shuffle=False,
+        token_budget=config.evaluation.batch_tokens,
     )
-    test_loader, _ = _data_loader(test_dataset, config.training, tokenizers, shuffle=False)
+    test_loader, _ = _data_loader(
+        test_dataset, config.training, tokenizers, shuffle=False, token_budget=config.evaluation.batch_tokens
+    )
     estimated_steps = max(
         1,
         math.ceil(len(train_loader) / config.training.gradient_accumulation_steps)
@@ -603,6 +613,7 @@ def train_model(
                         selection.device,
                         config.training.label_smoothing,
                         config.evaluation.sample_count,
+                        config.evaluation.maximum_generation_length,
                     )
                     last_validation_step = global_step
                     validation_loss = float(metrics["loss"])
@@ -637,6 +648,7 @@ def train_model(
                     selection.device,
                     config.training.label_smoothing,
                     config.evaluation.sample_count,
+                    config.evaluation.maximum_generation_length,
                 )
                 validation_loss = float(metrics["loss"])
                 tracker.metric({"event": "validation", "epoch": epoch + 1, "step": global_step} | metrics)
@@ -675,6 +687,7 @@ def train_model(
             selection.device,
             config.training.label_smoothing,
             config.evaluation.sample_count,
+            config.evaluation.maximum_generation_length,
         )
         tracker.samples(global_step + 1, test_samples)
         duration = time.monotonic() - started

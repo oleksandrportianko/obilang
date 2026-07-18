@@ -57,7 +57,13 @@ def evaluate_version(
     training_config = TrainingConfig.model_validate(metadata.training_configuration).model_copy(
         update={"device": device, "mixed_precision": False, "num_workers": 0}
     )
-    loader, _ = _data_loader(dataset, training_config, runtime.tokenizers, shuffle=False)
+    loader, _ = _data_loader(
+        dataset,
+        training_config,
+        runtime.tokenizers,
+        shuffle=False,
+        token_budget=config.evaluation.batch_tokens,
+    )
     started = time.perf_counter()
     metrics, samples = evaluate_loader(
         runtime.model,
@@ -65,6 +71,7 @@ def evaluate_version(
         runtime.tokenizers,
         runtime.selection.device,
         training_config.label_smoothing,
+        maximum_generation_length=config.evaluation.maximum_generation_length,
     )
     duration = time.perf_counter() - started
     checkpoint = paths.root / str(metadata.checkpoint_path)

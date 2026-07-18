@@ -113,6 +113,10 @@ class TokenBatchSampler(Sampler[list[int]]):
                     indices[start : start + pool_size], key=self.dataset.token_length
                 )
             ]
+        else:
+            # Evaluation order does not affect metrics. Grouping equal-length rows
+            # avoids padding short rows to one long sequence and bounds decoding work.
+            indices.sort(key=self.dataset.token_length)
         batches: list[list[int]] = []
         batch: list[int] = []
         longest = 0

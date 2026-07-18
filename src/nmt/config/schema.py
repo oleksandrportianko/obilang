@@ -195,6 +195,8 @@ class EvaluationConfig(StrictModel):
     beam_width: int = Field(default=4, ge=1)
     length_penalty: float = Field(default=0.6, ge=0)
     sample_count: int = Field(default=20, ge=0)
+    batch_tokens: int | None = Field(default=None, ge=16)
+    maximum_generation_length: int | None = Field(default=None, ge=4)
 
 
 class PromotionConfig(StrictModel):
