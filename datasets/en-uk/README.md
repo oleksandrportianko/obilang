@@ -22,6 +22,16 @@ duplicates and conflicting repeated source or target sentences are rejected.
 Nothing is silently deleted: rejected values and symbolic reasons are written
 to `rejected/<dataset-version>.jsonl`, with counters under `metadata`.
 
+## Multi-sentence examples
+
+Multi-sentence text is supported: place each complete source paragraph on one
+line and its complete translation on the matching target line. The small model
+configuration supports up to 512 SentencePiece tokens per side, which is often
+enough for a roughly 2,000-character paragraph. Keep source and target within
+that limit; the exact token count depends on vocabulary and punctuation. The
+validation decoder uses the same 512-token limit, so these examples are
+evaluated without an artificial shorter output cap.
+
 ## Alignment and versions
 
 Only parallel text relies on line alignment. Tabular rows carry both sentences.

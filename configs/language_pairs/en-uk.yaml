@@ -7,8 +7,8 @@ language_pair:
 data:
   unicode_normalization: NFC
   minimum_characters: 1
-  maximum_characters: 1000
-  maximum_tokens_approximation: 256
+  maximum_characters: 2000
+  maximum_tokens_approximation: 512
   maximum_length_ratio: 3.0
   detect_language_mismatch: false
   source_scripts: [Latn]
@@ -34,7 +34,7 @@ model:
   decoder_layers: 4
   feedforward_dimension: 1536
   dropout: 0.1
-  maximum_sequence_length: 256
+  maximum_sequence_length: 512
   tied_target_embeddings: true
   initialization: xavier_uniform
 
@@ -68,9 +68,9 @@ fine_tuning:
   freeze_encoder_layers: 0
 
 evaluation:
-  # Keep autoregressive validation memory bounded independently of training batches.
-  batch_tokens: 1024
-  maximum_generation_length: 64
+  # Keep long-context validation memory bounded while allowing complete outputs.
+  batch_tokens: 512
+  maximum_generation_length: 512
   metrics:
     - bleu
     - chrf

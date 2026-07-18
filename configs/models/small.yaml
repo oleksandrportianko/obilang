@@ -5,6 +5,6 @@ model:
   decoder_layers: 2
   feedforward_dimension: 512
   dropout: 0.1
-  maximum_sequence_length: 128
+  maximum_sequence_length: 512
   tied_target_embeddings: true
   initialization: xavier_uniform
