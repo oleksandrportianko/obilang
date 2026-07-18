@@ -15,9 +15,9 @@ data:
   target_scripts: [Cyrl]
   reject_malformed_markup: true
   split:
-    train: 0.90
-    validation: 0.05
-    test: 0.05
+    train: 0.985
+    validation: 0.005
+    test: 0.01
     seed: 42
 
 tokenizer:
