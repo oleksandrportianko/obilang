@@ -1,10 +1,11 @@
-PYTHON ?= python3
 VENV ?= .venv
 
 ifeq ($(OS),Windows_NT)
+PYTHON ?= python
 VENV_PYTHON := $(VENV)/Scripts/python.exe
 VENV_NMT := $(VENV)/Scripts/nmt.exe
 else
+PYTHON ?= python3
 VENV_PYTHON := $(VENV)/bin/python
 VENV_NMT := $(VENV)/bin/nmt
 endif

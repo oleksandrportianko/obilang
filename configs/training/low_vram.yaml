@@ -1,7 +1,7 @@
 training:
-  batch_tokens: 1536
-  # Keep the micro-batch MPS-friendly but make frequent optimizer updates.
-  gradient_accumulation_steps: 2
+  # The small model used only ~1.6 GB on the local GPU; this improves throughput.
+  batch_tokens: 4096
+  gradient_accumulation_steps: 1
   learning_rate: 0.0003
   # The previous 4,000-step warmup exceeded the entire small-corpus run.
   warmup_steps: 500

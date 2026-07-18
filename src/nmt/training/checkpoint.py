@@ -96,7 +96,9 @@ def save_checkpoint(
     temporary = Path(name)
     try:
         torch.save(payload, temporary)
-        with temporary.open("rb") as checkpoint_file:
+        # Windows requires a writable handle for fsync; a read-only descriptor
+        # raises OSError(9, "Bad file descriptor") there.
+        with temporary.open("r+b") as checkpoint_file:
             os.fsync(checkpoint_file.fileno())
         os.replace(temporary, path)
     except (OSError, RuntimeError) as exc:
