@@ -78,3 +78,7 @@ events.out.tfevents.*
 # Additional files to ignore
 temp/**
 !temp/.gitkeep
+
+# Local source adapters, crawl caches, and human-review queues.
+# These may contain licensed third-party material and are intentionally local.
+parsers/

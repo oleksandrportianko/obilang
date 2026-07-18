@@ -1,17 +1,19 @@
 training:
   batch_tokens: 1536
-  gradient_accumulation_steps: 16
+  # Keep the micro-batch MPS-friendly but make frequent optimizer updates.
+  gradient_accumulation_steps: 2
   learning_rate: 0.0003
-  warmup_steps: 4000
+  # The previous 4,000-step warmup exceeded the entire small-corpus run.
+  warmup_steps: 500
   scheduler: inverse_sqrt
-  epochs: 20
+  epochs: 12
   label_smoothing: 0.1
   gradient_clip_norm: 1.0
   mixed_precision: true
   checkpoint_every_steps: 1000
-  validate_every_steps: 1000
+  validate_every_steps: 500
   keep_periodic_checkpoints: 2
-  patience_validations: 8
+  patience_validations: 6
   seed: 42
   deterministic: false
   device: auto
