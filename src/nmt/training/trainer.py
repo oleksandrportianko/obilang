@@ -558,6 +558,24 @@ def train_model(
                     model.parameters(), config.training.gradient_clip_norm
                 )
                 if not torch.isfinite(gradient_norm):
+                    if selection.mixed_precision_enabled:
+                        # unscale_ has already recorded the overflow. Let GradScaler
+                        # skip this optimizer update and lower its scale instead of
+                        # aborting an otherwise recoverable FP16 training run.
+                        scaler.step(optimizer)
+                        scaler.update()
+                        optimizer.zero_grad(set_to_none=True)
+                        LOGGER.warning(
+                            "Skipped optimizer update with non-finite AMP gradients at step %d",
+                            global_step + 1,
+                            extra={
+                                "experiment_id": experiment_id,
+                                "model_version": version.version_id,
+                                "epoch": epoch + 1,
+                                "step": global_step + 1,
+                            },
+                        )
+                        continue
                     raise FloatingPointError(
                         f"Non-finite gradient norm at optimizer step {global_step + 1}."
                     )
