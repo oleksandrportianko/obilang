@@ -10,8 +10,8 @@ training:
   label_smoothing: 0.1
   gradient_clip_norm: 1.0
   mixed_precision: true
-  checkpoint_every_steps: 1000
-  validate_every_steps: 500
+  checkpoint_every_steps: 3000
+  validate_every_steps: 10000
   keep_periodic_checkpoints: 2
   patience_validations: 6
   seed: 42
