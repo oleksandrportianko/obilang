@@ -1,5 +1,7 @@
 # Training Quick Guide
 
+## macOS and Linux (Bash/zsh)
+
 ```bash
 # Run all commands from the repository root.
 cd /path/to/obilang
@@ -102,4 +104,84 @@ nmt versions set-status \
 
 # Promote the approved candidate to the production alias.
 nmt versions promote --version "$NMT_CANDIDATE_VERSION"
+```
+
+## Windows (PowerShell)
+
+Run these commands from the repository root. PowerShell uses a backtick (`` ` ``)
+for line continuation, not a backslash. The backtick must be the final character
+on its line.
+
+```powershell
+# Activate the local Python environment.
+.\.venv\Scripts\Activate.ps1
+
+# Check CUDA availability. Device selection remains automatic during training.
+python -c "import torch; print(torch.cuda.is_available())"
+
+# Validate, prepare, and inspect the dataset.
+nmt dataset validate --pair en-uk
+nmt dataset prepare --pair en-uk
+nmt dataset report --pair en-uk
+
+# Train the tokenizer after preparing a new dataset version.
+nmt tokenizer train --pair en-uk
+
+# Train a small English-to-Ukrainian model.
+nmt train `
+  --pair en-uk `
+  --direction en-to-uk `
+  --config configs/models/small.yaml `
+  --config configs/training/low_vram.yaml
+
+# Add a personal ignored override last, for example a higher epoch count.
+nmt train `
+  --pair en-uk `
+  --direction en-to-uk `
+  --config configs/models/small.yaml `
+  --config configs/training/low_vram.yaml `
+  --config configs/training/custom/more_epochs.yaml
+
+# Train the independent Ukrainian-to-English model.
+nmt train `
+  --pair en-uk `
+  --direction uk-to-en `
+  --config configs/models/small.yaml `
+  --config configs/training/low_vram.yaml
+
+# Use the short CPU smoke configuration instead of a normal run.
+nmt train `
+  --pair en-uk `
+  --direction en-to-uk `
+  --config configs/smoke.yaml
+
+# Resume an interrupted run.
+$checkpointPath = "models/en-uk/en-to-uk/checkpoints/en-uk-en-to-uk-v1.0.0/latest.pt"
+nmt train resume --checkpoint $checkpointPath --device auto
+
+# Fine-tune from an immutable parent with historical replay.
+$parentVersion = "en-uk-en-to-uk-v1.0.0"
+nmt fine-tune `
+  --pair en-uk `
+  --direction en-to-uk `
+  --from-version $parentVersion `
+  --config configs/training/low_vram.yaml
+
+# Evaluate and compare a candidate against its parent.
+$candidateVersion = "en-uk-en-to-uk-v1.1.0"
+nmt evaluate `
+  --pair en-uk `
+  --direction en-to-uk `
+  --version $candidateVersion `
+  --device auto
+nmt compare `
+  --version-a $parentVersion `
+  --version-b $candidateVersion `
+  --device auto
+
+# Approve and promote a reviewed candidate.
+nmt versions set-status `
+  --version $candidateVersion `
+  --status approved
+nmt versions promote --version $candidateVersion
 ```
